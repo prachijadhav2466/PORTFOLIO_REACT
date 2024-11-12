@@ -4,9 +4,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
-    "start-backend": "node server.js", 
-    "start-frontend": "npm run dev --prefix Frontend",
+    "start": "concurrently \"npm run start-Backend\" \"npm run start-Frontend\"",
+    "start-Backend": "node server.js", 
+    "start-Frontend": "npm run dev --prefix Frontend",
     "dev": "nodemon server.js",
     "heroku-postbuild": "NFH_CONFIG_PRODUCTION=false npm install --prefix Frontend && npm run build --prefix Frontend"
   },
