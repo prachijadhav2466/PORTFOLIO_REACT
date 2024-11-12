@@ -3,6 +3,7 @@ console.log("Server is starting...");
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path");
 require("dotenv").config();
 
 // Initialize Express app
@@ -42,7 +43,14 @@ app.post("/api/contact", async (req, res) => {
       email,
       message
     });
-
+       
+    if(process.env.NODE_ENV == "production") {
+      const dirPath = path.resolve();
+      app.use(express.static(path.join("Frontend/dist")))
+      app.get("*",(req,res)=>{
+        res.sendFile(path.resolve,dirPath,"Frontend","dist","index.html")
+      })
+    }
     // Save the document to MongoDB
     await newMessage.save();
 
@@ -54,7 +62,7 @@ app.post("/api/contact", async (req, res) => {
 });
 
 // Start the Express server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
